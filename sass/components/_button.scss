@@ -1,0 +1,116 @@
+.btn{
+
+  &,//now its also applied to a <button> element
+  &:link,/* pseudo class link => link unvisited -> pseudo class visited = > link visited*/
+  &:visited/*default styling of visited links and links when clicked*/
+  { /* link => pseudo class -> special state of the btn class*/
+    /* anchor tag can have 4 pseudo classes:
+    link
+    visited
+    active => link is selecded => clicked on
+    visited => after visited
+    hover
+    */
+    text-transform: uppercase;
+
+    border-radius: 10rem;
+    text-decoration: none; /*get rid of blue and underline in a link   =>
+      shorthand property for:
+      text-decoration-line (required)
+      text-decoration-color
+      text-decoration-style
+  */
+    padding: 1.5rem 4rem;
+    position: relative;
+    display: inline-block;/*we should always do this if we give some padding to inline elements, without it -> it overlays*/
+    /*inline element is treated as text -> if we want to center... it -> just use text-align: center on the parent */
+    transition: all 0.2s;/*specify which properties to animate (all) => transform is animated from the inital state*/
+    /*the transition property MUST be on the initial state*/
+    font-size: 1.6rem;
+
+
+
+  }
+
+
+  &:hover{
+    transform:translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black,.2); /*x , y blurr, rgba (because we want to have opacity)*/
+    &::after{
+      transform: scaleX(1.4) scaleY(1.6);/*1.5 times the size of the element*/
+      /*transform: scale(1.4);*/
+      opacity:0;
+    }
+  }
+
+  &:active,
+  &:focus{
+    outline: none;//no outline if focused (selected with keyboard) and active
+    transform: translateY(-1px);/*translate always applies to the original state*/
+    box-shadow: 0 .5rem 1rem rgba($color-black,.2); /*x , y blurr, rgba (because we want to have opacity)*/
+  }
+
+  &--white{
+    background-color:$color-white;
+    color: $color-grey-dark;
+    &::after{
+      background-color:$color-white;
+    }
+
+  }
+
+  &--green{
+    box-shadow: none;
+    background-color:$color-primary;
+    color: $color-white;
+    &::after{
+      background-color:$color-primary;
+    }
+
+  }
+
+  &::after{/*after pseudo element after-> virtual element after the element*/
+    content: "";/*has to be specified always*/
+    display: inline-block; /*in this case we want to look the pseudo element like*/
+    height:100%; /*a pseudo element is treated kind of a sublass of an element therefore we dan use heihgt: 100% => the same dimension*/
+    width:100%;
+    border-radius: 100px;
+    position: absolute; /*absolute looks for the first element that has a relative position => in this case  header => but we want to have the btn -> change property .btn::visited ... to position relative;  */
+    top: 0;
+    left: 0;
+    z-index: -1; /*z index defines the position if they are on top of each other => -1 its behind the button*/
+    transition: all .4s;/*transition is always specified at the initial state*/
+  }
+
+  &--animated {
+    animation: moveInBottom .5s ease-out .75s;/* 0.75 => animation delay*/
+    animation-fill-mode: backwards;/*automatically adds the style of 0% before the animation starts*/
+    /*animation-fill-mode definiert den Zustand einer Animation vor und nach deren Ablauf.*/
+    /*backwareds Das Element nimmt die Werte des ersten Animationsschrittes an und behält diesen auch während der animation-delay*/
+  }
+}
+
+.btn-text{
+  &:link,
+  &:visited{
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary; //in order to  make it 2 px -> user has to double the font-size -> does not make sense for small values
+    padding: 3px;
+    transition: all .2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, .15);
+    transform: translateY(-2px);
+  }
+
+  &:active{
+    box-shadow: 0 1rem 1rem rgba($color-black, .15);
+    transform: translateY(0);// 0 => inital position
+
+  }
+}

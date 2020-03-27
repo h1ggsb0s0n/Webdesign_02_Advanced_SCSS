@@ -1,0 +1,54 @@
+@keyframes moveInLeft{
+  /*for browser performance it is best to animate only 2 properties at the same time*/
+  0%   { /*before the animation starts*/
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  /*60%{
+    transform: rotate(20deg);
+  }*/
+
+  80%{
+
+    transform: translateX(1rem);
+  }
+
+  100%{
+    opacity: 1;
+    translate: translateX(0);
+  }
+}
+/*there are two type of animations 1) transform 2) keyframes*/
+@keyframes moveInRight{
+  /*for browser performance it is best to animate only 2 properties at the same time*/
+  0%   { /*before the animation starts*/
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80%{
+
+    transform: translateX(-1rem);
+  }
+
+  100%{
+    opacity: 1;
+    translate: translateX(0);
+  }
+}
+
+
+@keyframes moveInBottom{
+  /*for browser performance it is best to animate only 2 properties at the same time*/
+  0%   { /*before the animation starts*/
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+
+  100%{
+    opacity: 1;
+    translate: translateX(0);
+  }
+}

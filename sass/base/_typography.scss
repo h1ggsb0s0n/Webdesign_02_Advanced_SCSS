@@ -1,0 +1,76 @@
+body {
+  /*inherited to all child elements*/
+  font-family: "Lato", sans-serif;/* will be inherited for all child elements, more efficient to define it here rather than in the * selector*/
+  /*Lato is a google font -> included in the index.html link tag*/
+  font-weight:400;
+  font-size: $default-font-size;
+  line-height: 1.7; /*1.7 heigher than the usual line-height*/
+  color: $color-grey-dark; /* text color*/
+  padding: 3rem;/*gets not inherited*/
+
+}
+
+.heading-primary{
+  color: $color-white;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /* HACKK-> the element behind it is not visible ->the entire heading-primary-element (h1) moves during the animation, the text translate some pixels to the top (nobody knows why) -> thsi property fixes that*/
+  margin-bottom:6rem; /*create some space for the button underneath it*/
+
+  &--main{
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+  }
+
+  &--sub{
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;/*CAREFULL:  we loaded the lato font with only 100,300,400,700,900 font weight-> these are the only possibilities*/
+    letter-spacing: 1.75rem;
+
+    animation-name: moveInRight;
+    animation-duration: 2s;
+    animation-delay:2s; /*if animation delay is used the property fill-mode must be used => see button*/
+    animation-fill-mode: backwards;
+    animation-timing-function: ease-out;
+  }
+
+}
+
+.heading-secondary{
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+  display: inline-block; //get rid of blockelement to color only the width of the text (h1 is an Block element)
+  -webkit-background-clip: text; //linear gradient is visible only where the text is
+  color: transparent; //get rid of the text that sits on the top of the website
+  letter-spacing: .2rem;
+  transition: all .2s;
+  //to center it we need a a div around it "u-center-text" -> folder utility class
+  // inline blocks are centered if the sorrounding block does text-align: center
+
+  &:hover{
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+  }
+}
+
+.heading-tertiary{
+  font-size: $default-font-size;
+  font-weight:700;
+  text-transform: uppercase;
+
+}
+.paragraph{
+  font-size:$default-font-size;
+
+  &:not(:last-child){
+    margin-bottom: 3rem;
+  }
+}

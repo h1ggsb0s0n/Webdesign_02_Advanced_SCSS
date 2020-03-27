@@ -1,0 +1,36 @@
+.header{
+  height: 95vh; /* every heigth fo the element 95 %/ 100% every element has the height of the viewport -> so simply said: there is a gap at the bottom of the image*/
+  background-image: linear-gradient(to right bottom,
+    rgba($color-primary-light,0.8),
+    $color-primary-dark),
+    url(../img/hero.jpg);/* two background images at once (gradient + image)
+  background-size: cover;/*whatever the width of the viewport or element, tries to fit*/
+  background-position: top;/*whatebver the viewport size: top of the image stays -> does not crop top at top -> see also bckgr-ps: center or bottom -> use inspector and change it there*/
+  clip-path: polygon(0 0,100% 0,100% 75vh, 0 100%); /*  always x y, can also be pixels. Clip out a part of the image, specifies the visible polygon */
+  position: relative; /*because of logo box*/
+
+  &__logo-box{
+    position: absolute;
+    top: 4rem;
+    left: 4rem; /*origin of top and left -> parentelement that has a position of relative => in this case header.*/
+  }
+
+  &__logo{
+    height: 3.5rem; /* width automatically figured out*/
+  }
+
+  &__text-box{
+    position: absolute; /*no matter the height or width, it has to be in the middle*/
+    top: 40%;/*50% of the parent height -> it takes the upper left corner of the parent */
+    left: 50%;/* top  + left => in relation to the parent element*/
+    transform: translate(-50%,-50%); /* now the element is not in relation to its parent, it is in relation to ITSELF*/
+    /*-50%-> will be shifted to the left side -50% of the elements width*/
+    text-align: center;
+
+  }
+
+  &__logo:hover{
+    animation: moveInRight 1s ease-out;
+  }
+
+}

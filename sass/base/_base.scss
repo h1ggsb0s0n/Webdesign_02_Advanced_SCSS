@@ -1,0 +1,21 @@
+*, /* with this * pseudo elements do not get these properties*/
+*::before,
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;/*every element now inherits box-sizing -> default its not inherited -> now we can use box-sizhing in html root*/
+}
+
+/*END GLOBAL RESET*/
+
+html{
+  //defines what 1 rem is -> 16px is default -> makes 10 px
+  font-size: 62.5%;
+
+}
+
+body {
+
+  box-sizing: border-box;
+
+}
