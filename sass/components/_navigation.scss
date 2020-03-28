@@ -1,0 +1,149 @@
+.navigation {
+  &__checkbox {
+    display: none;
+  }
+
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem; //the button is 1 rem wider than the background
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, .1);
+    text-align: center; // to get the three lines in the center
+    cursor: pointer;
+  }
+
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%; //makes a perfekt circle
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient($color-primary-light, $color-primary-dark); //starts in the middle of the element and goes outside
+    z-index: 1000; //z-index only works if the element is positioned
+    transition: all 0.8s;
+    //transform: scale(80);
+  }
+
+  &__nav {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    visibility: hidden;
+    opacity: 0;
+    width: 0; //now cyou can't click the links
+    transition: all 0.8s cubic-bezier(0.85, 0, 0.35, 1); // see
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+      background-size: 220%; //when we're increasing the size, the gradient goes to the side because it starts top left of element, when its 200% the line of the gradient is away
+      //20% more because of the 120deg
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:active,
+    &:hover {
+      background-position: 100%; //Positions the top right  of the element
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+  //Functionality
+  //Checkbox hack: how it works: the checkbox has an id, the label has the same for="" attribute -> whenever the label(in this case class __button is clicked -> the checkbox gets checked)
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+  }
+  //ICON
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::after,
+    &::before {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::after,
+    &::before {
+      content: ""; //must be defined before they appear
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+
+    &::before {
+      top: -.8rem;
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  &__button:hover &__icon::before{
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after{
+    top: 1rem;
+  }
+
+  &__checkbox:checked + &__button &__icon{//if button checked -> select direct sibling -> select the icon of the direct sibling
+    background-color: transparent;
+  }
+  &__checkbox:checked + &__button &__icon::before{//if button checked -> select direct sibling -> select the icon of the direct sibling
+    top: 0; //spaced out to the stroke in the middle -> so put it up
+    transform: rotate(135deg);
+  }
+  &__checkbox:checked + &__button &__icon::after{//if button checked -> select direct sibling -> select the icon of the direct sibling
+    top: 0; //spaced out to the stroke in the middle -> so put it up
+    transform: rotate(-135deg);
+  }
+}
